@@ -1,0 +1,19 @@
+FROM bitnami/spark:3.5.0
+
+USER root
+
+# Install Python dependencies
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir \
+    delta-spark==3.1.0 \
+    python-dotenv==1.0.1
+
+WORKDIR /app
+COPY consumer/ consumer/
+COPY config/   config/
+
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+ENV PYSPARK_PYTHON=python3
+
+USER 1001

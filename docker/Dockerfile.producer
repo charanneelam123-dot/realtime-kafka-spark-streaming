@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir \
+    confluent-kafka==2.3.0 \
+    python-dotenv==1.0.1 \
+    tenacity==8.2.3
+
+COPY producer/ producer/
+COPY config/   config/
+
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+
+CMD ["python", "producer/clickstream_producer.py"]
