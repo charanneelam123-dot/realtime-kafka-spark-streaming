@@ -250,3 +250,4 @@ pytest tests/ -v --cov=. --cov-report=term-missing
 | Local infra | Docker Compose |
 | Testing | pytest + local PySpark |
 | CI/CD | GitHub Actions (6-job pipeline with Kafka integration test) |
+
